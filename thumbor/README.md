@@ -29,3 +29,15 @@ $ docker run -p 8888:8888 -e SECURITY_KEY=yourSecurityKeyABC123 smrchy/thumbor
 
 ```
 
+## Ubuntu Upstart script to start Thumbor on boot
+
+```
+description "Thumbor container"
+author "smrchy"
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  /usr/bin/docker run -p 8888:8888 -e SECURITY_KEY=abc123 smrchy/thumbor >> /tmp/thumbor.log 2>&1
+end script
+```
