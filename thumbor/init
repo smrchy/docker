@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -n "$SECURITY_KEY" ]; then
+    echo "Setting SECURITY_KEY!"
+    echo -e "\nSECURITY_KEY=\"$SECURITY_KEY\"\nALLOW_UNSAFE_URL=False\n" >> /etc/thumbor.conf
+fi
+
+echo "Starting thumbor..."
+/usr/local/bin/thumbor -c /etc/thumbor.conf --port 8888 --log-level=info
