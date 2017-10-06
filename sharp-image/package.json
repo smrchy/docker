@@ -1,0 +1,27 @@
+{
+  "name": "sharp-image",
+  "version": "0.1.0",
+  "description": "Sharp-Image Resizer",
+  "dependencies": {
+    "express": "^4.16.1",
+    "morgan": "^1.9.0",
+    "request": "^2.83.0",
+    "sharp": "^0.18.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.35",
+    "@types/node": "^7.0.5"
+  },
+  "apidoc": {
+    "title": "Sharp-Image",
+    "url": "https://sharp-image.webmart.de"
+  },
+  "scripts": {
+    "apidoc": "apidoc -i app/ -o apidoc/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smrchy/sharp-image"
+  }
+}
