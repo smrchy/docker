@@ -18,7 +18,7 @@ export default class Mw {
 		let command = parts[parts.length - 1];
 		// Check command - must start with an `s`
 		// If not we just try to load the image
-		if (command.slice(0, 1) !== "s") {
+		if (command.slice(0, 1) !== "s" || parts.length === 1) {
 
 			if (parts.length === 1) {
 				res.locals.image_url = parts;
