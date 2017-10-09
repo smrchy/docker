@@ -15,31 +15,27 @@ export default class Mw {
 		// Make sure there is a command separated by `=` is supplied
 		// e.g. /image/https%3A%2F%2Fwww.webmart.de%2Fweb%2Fimg%2Fsuche_ss2.png=s320
 		let parts: Array<string> = req.params[0].split("=");
-		// Just a simple URL without a resize operation.
-		if (parts.length === 1) {
-			res.locals.image_url = parts[0];
+		let command = parts[parts.length - 1];
+		// Check command - must start with an `s`
+		// If not we just try to load the image
+		if (command.slice(0, 1) !== "s") {
+
+			if (parts.length === 1) {
+				res.locals.image_url = parts;
+			}
+			else {
+				res.locals.image_url = parts.join("=");
+			}
 			next();
 			return;
 		}
-		else if (parts.length !== 2) {
-			next({message: "Invalid URL format. Please supply exactly one resize command.", status: 403});
-			return;
-		}
-
-		let command: string = parts[1];
-		res.locals.image_url = parts[0];
-
 		// Check if command is way too long. Must be 3-7 chars (e.g. s10 - s9999-c)
-		if (command.length < 3 || command.length > 7) {
+		else if (command.length < 3 || command.length > 7) {
 			next({message: "Invalid resize command. Invalid length.", status: 403});
 			return;
 		}
 
-		// Check command - must start with an `s`
-		if (command.slice(0, 1) !== "s") {
-			next({message: "Invalid resize command", status: 403});
-			return;
-		}
+		res.locals.image_url = parts.slice(0, -1).join("=");
 
 		// Check if it is a crop operation
 		if (command.slice(-2) === "-c") {
@@ -56,7 +52,7 @@ export default class Mw {
 		else {
 			res.locals.image_size = parseInt(command.slice(1), 10);
 			if (!config.IMG_SERVING_SIZES.includes(res.locals.image_size)) {
-				next({message: "Invalid crop size.", status: 403});
+				next({message: "Invalid size.", status: 403});
 				return;
 			}
 		}
@@ -70,7 +66,6 @@ export default class Mw {
 		if (image.slice(0, 4) !== "http") {
 			image = "http://" + image;
 		}
-		console.log("image", image);
 		request({
 			url: image,
 			method: "GET",
