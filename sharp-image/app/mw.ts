@@ -103,7 +103,8 @@ export default class Mw {
 		}
 		else {
 			sharp(res.locals.image_body)
-			.resize(res.locals.image_size)
+			.resize(res.locals.image_size, null)
+			.withoutEnlargement(true)
 			.toBuffer()
 			.then(_finish)
 			.catch(next);
