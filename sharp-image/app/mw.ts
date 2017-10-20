@@ -61,8 +61,8 @@ export default class Mw {
 	}
 
 	public loadImage (req, res, next) {
-		let image = decodeURIComponent(res.locals.image_url);
-
+		// let image = decodeURIComponent(res.locals.image_url);
+		let image = res.locals.image_url;
 		if (image.slice(0, 4) !== "http") {
 			image = "http://" + image;
 		}

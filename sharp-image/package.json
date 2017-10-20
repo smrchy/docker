@@ -1,6 +1,6 @@
 {
   "name": "sharp-image",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Sharp-Image Resizer",
   "dependencies": {
     "express": "^4.16.1",
