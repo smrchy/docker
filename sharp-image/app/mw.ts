@@ -22,9 +22,8 @@ export default class Mw {
 		// Check command - must start with an `s`
 		// If not we just try to load the image
 		if (command.slice(0, 1) !== "s" || parts.length === 1) {
-
 			if (parts.length === 1) {
-				res.locals.image_url = parts;
+				res.locals.image_url = parts[0];
 			}
 			else {
 				res.locals.image_url = parts.join("=");
