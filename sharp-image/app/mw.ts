@@ -64,7 +64,6 @@ export default class Mw {
 	}
 
 	public loadImage (req, res, next) {
-		
 		// let image = decodeURIComponent(res.locals.image_url);
 		let image = res.locals.image_url;
 		// Quick fix for some unsupported files
