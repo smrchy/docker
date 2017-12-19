@@ -4,6 +4,9 @@ import config from "./config";
 // Request
 import * as request from "request";
 
+// Lodash
+import * as _ from "lodash";
+
 // Sharp
 import * as sharp from "sharp";
 
@@ -61,8 +64,15 @@ export default class Mw {
 	}
 
 	public loadImage (req, res, next) {
+		
 		// let image = decodeURIComponent(res.locals.image_url);
 		let image = res.locals.image_url;
+		// Quick fix for some unsupported files
+		const image_suffix = _.last(image.split(".")).toLowerCase();
+		if (image_suffix === "bmp") {
+			next({message: "Unsupported image format.", status: 200});
+			return;
+		}
 		if (image.slice(0, 4) !== "http") {
 			image = "http://" + image;
 		}
