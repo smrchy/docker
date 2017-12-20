@@ -86,6 +86,7 @@ export default class Mw {
 			}
 			if (resp.statusCode !== 200) {
 				next({message: "Request failed.", status: resp.statusCode});
+				return;
 			}
 			res.locals.image_headers = resp.headers;
 			res.locals.image_body = body;

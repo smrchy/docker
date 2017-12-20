@@ -2,6 +2,12 @@
 
 Resize images by adding for example `=s320` at the end of the URL.
 
+## But WHY?
+
+Adding the resize parameter at the end of the URL contrary to query parameters allows for far better caching via CDNs.
+
+Trivia: This way of resizing images was pioneered by Google with the first version of their public Picasa Albums.
+
 ## Supported Sizes and Crop-Sizes
 
 Can be set via `config.json`.
