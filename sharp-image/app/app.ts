@@ -21,9 +21,12 @@ app.get("/image/*", mw.checkData, mw.loadImage, mw.processImage, (req, res, next
 	next();
 });
 
+app.get("/ping", (req, res, next) => {
+	res.send("PONG");
+})
+
 app.use( (req, res, next) => {
 	next();
-	return;
 });
 
 // Generic error handle
